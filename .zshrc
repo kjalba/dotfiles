@@ -222,3 +222,9 @@ alias tns="~/scripts/tmux-sessionizer"
 # other Aliases shortcuts
 alias c="clear"
 alias e="exit"
+
+# Zettelkasten
+export ZETTELKASTEN="$HOME/Zettelkasten"
+alias in="cd \$ZETTELKASTEN/0-inbox/"
+alias cdzk="cd \$ZETTELKASTEN"
+
