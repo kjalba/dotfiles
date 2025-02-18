@@ -135,13 +135,14 @@ alt-shift-8 = 'move-node-to-workspace 8'
 alt-shift-9 = 'move-node-to-workspace 9'
 alt-shift-b = 'move-node-to-workspace B'
 alt-shift-e = 'move-node-to-workspace E'
-alt-shift-f = 'fullscreen'
+alt-shift-f = 'move-node-to-workspace F'
 alt-shift-m = 'move-node-to-workspace M'
 alt-shift-n = 'move-node-to-workspace N'
 alt-shift-p = 'move-node-to-workspace P'
 alt-shift-s = 'move-node-to-workspace S'
 alt-shift-t = 'move-node-to-workspace T'
 alt-shift-v = 'move-node-to-workspace V'
+alt-shift-z = 'fullscreen'
 
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
@@ -207,7 +208,11 @@ run = "move-node-to-workspace N"
 if.app-id = 'md.obsidian'
 run = "move-node-to-workspace N"
 
-
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
 run = "move-node-to-workspace S"
+
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = "move-node-to-workspace F"
