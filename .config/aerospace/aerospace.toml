@@ -113,6 +113,7 @@ alt-6 = 'workspace 6'
 alt-7 = 'workspace 7'
 alt-8 = 'workspace 8'
 alt-9 = 'workspace 9'
+alt-a = 'workspace A' # for anki
 alt-b = 'workspace B' # for browser
 alt-e = 'workspace E' # 
 alt-f = 'workspace F' # for finder
@@ -133,6 +134,7 @@ alt-shift-6 = 'move-node-to-workspace 6'
 alt-shift-7 = 'move-node-to-workspace 7'
 alt-shift-8 = 'move-node-to-workspace 8'
 alt-shift-9 = 'move-node-to-workspace 9'
+alt-shift-a = 'move-node-to-workspace A'
 alt-shift-b = 'move-node-to-workspace B'
 alt-shift-e = 'move-node-to-workspace E'
 alt-shift-f = 'move-node-to-workspace F'
@@ -212,7 +214,10 @@ run = "move-node-to-workspace N"
 if.app-id = 'com.spotify.client'
 run = "move-node-to-workspace S"
 
-
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
 run = "move-node-to-workspace F"
+
+[[on-window-detected]]
+if.app-id = 'net.ankiweb.dtop'
+run = "move-node-to-workspace A"
