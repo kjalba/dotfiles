@@ -5,6 +5,7 @@ DIRS=(
     "$HOME/dev/"
     "$HOME/dev/github.com/kjalba/"
     "$HOME/dev/p/"
+    "$HOME/dev/games/"
     "$HOME"
 )
 
