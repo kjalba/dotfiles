@@ -86,6 +86,19 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
+#----- Vim Editing modes & keymaps ------ 
+set -o vi 
+
+export EDITOR=nvim
+export VISUAL=nvim
+
+# ctrl y accept requires zsh-autosuggestions to be active
+bindkey -M viins '^Y' autosuggest-accept 
+
+bindkey -M viins '^P' up-line-or-beginning-search
+bindkey -M viins '^N' down-line-or-beginning-search
+#----------------------------------------
+
 # Starship 
 eval "$(starship init zsh)"
 # set Starship PATH
