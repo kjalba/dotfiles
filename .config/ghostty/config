@@ -1,5 +1,7 @@
 # By default Reload config with shft + cmd + , 
 
+custom-shader = shaders/cursor_smear.glsl
+
 config-file = themes/rosepine
 background = #000000
 background-opacity = 0.65
