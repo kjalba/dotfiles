@@ -46,27 +46,61 @@ keybind = super+b>c=new_tab
 keybind = super+b>n=new_window
 
 # tab nav
-keybind = super+b>1=goto_tab:1
-keybind = super+b>2=goto_tab:2
-keybind = super+b>3=goto_tab:3
-keybind = super+b>4=goto_tab:4
-keybind = super+b>5=goto_tab:5
-keybind = super+b>6=goto_tab:6
-keybind = super+b>7=goto_tab:7
-keybind = super+b>8=goto_tab:8
-keybind = super+b>9=goto_tab:9
+# keybind = super+b>1=goto_tab:1
+# keybind = super+b>2=goto_tab:2
+# keybind = super+b>3=goto_tab:3
+# keybind = super+b>4=goto_tab:4
+# keybind = super+b>5=goto_tab:5
+# keybind = super+b>6=goto_tab:6
+# keybind = super+b>7=goto_tab:7
+# keybind = super+b>8=goto_tab:8
+# keybind = super+b>9=goto_tab:9
 
 # splitting
-keybind = super+b>\=new_split:right
-keybind = super+b>-=new_split:down
-keybind = super+b>e=equalize_splits
+# keybind = super+b>\=new_split:right
+# keybind = super+b>-=new_split:down
+# keybind = super+b>e=equalize_splits
 
 # split nav (setting this to control will not work if tmux already uses it)
-keybind = super+b>h=goto_split:left
-keybind = super+b>j=goto_split:bottom
-keybind = super+b>k=goto_split:top
-keybind = super+b>l=goto_split:right
+# keybind = super+b>h=goto_split:left
+# keybind = super+b>j=goto_split:bottom
+# keybind = super+b>k=goto_split:top
+# keybind = super+b>l=goto_split:right
 
 #Shaders
 # custom-shader = shaders/bettercrt.glsl
 # custom-shader = shaders/retro-terminal.glsl
+
+keybind = super+1=text:\x00\x31
+keybind = super+2=text:\x00\x32
+keybind = super+3=text:\x00\x33
+keybind = super+4=text:\x00\x34
+keybind = super+5=text:\x00\x35
+keybind = super+6=text:\x00\x36
+keybind = super+7=text:\x00\x37
+keybind = super+8=text:\x00\x38
+
+keybind = super+digit_1=text:\x00\x31
+keybind = super+digit_2=text:\x00\x32
+keybind = super+digit_3=text:\x00\x33
+keybind = super+digit_4=text:\x00\x34
+keybind = super+digit_5=text:\x00\x35
+keybind = super+digit_6=text:\x00\x36
+keybind = super+digit_7=text:\x00\x37
+keybind = super+digit_8=text:\x00\x38
+
+# For passing through tmux
+# Command + g -> Prefix + g (open-github.sh)
+keybind = super+g=text:\x00\x67
+# Command + f -> Prefix + F (tmux-session-dispensary.sh)
+keybind = super+f=text:\x00\x46
+# Command + k -> Prefix + K (tmux-session-dispensary.sh config)
+keybind = super+k=text:\x00\x4b
+# Command + p -> Prefix + p (open-pdf.sh)
+keybind = super+p=text:\x00\x70
+# Command + z -> Prefix + Z (Zettelkasten)
+keybind = super+z=text:\x00\x5a
+# Command + e -> Prefix + e (edit links.tsv)
+keybind = super+e=text:\x00\x65
+# Command + l -> Prefix + l (links-picker.sh)
+keybind = super+l=text:\x00\x6c
