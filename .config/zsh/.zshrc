@@ -20,7 +20,8 @@ export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
 export PATH="$HOME/scripts:$PATH"
 
 # Nvim Aliases
-alias nv='NVIM_APPNAME=nvim-0.12 nvim'
+# alias nv='NVIM_APPNAME=nvim-0.12 nvim'
+alias nv='nvim'
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
