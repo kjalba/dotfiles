@@ -6,7 +6,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(fd -H . ~/dev/ ~/dev/p/ ~/dev/github.com/ ~/dev/github.com/kjalba/ -t d -d 1 | fzf)
+    selected=$(fd -H . ~/dev/ ~/dev/p/ ~/dev/github.com/ ~/dev/github.com/kjalba/ ~/learn/ -t d -d 1 | fzf)
 fi
 
 if [[ -z $selected ]]; then

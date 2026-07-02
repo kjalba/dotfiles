@@ -7,6 +7,7 @@ DIRS=(
     "$HOME/dev/p/"
     "$HOME/dev/games/"
     "$HOME"
+    "$HOME/learn/"
 )
 
 if [[ $# -eq 1 ]]; then
