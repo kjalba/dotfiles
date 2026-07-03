@@ -1,5 +1,9 @@
 local treesitter = require("nvim-treesitter")
 
+treesitter.setup({
+	install_dir = vim.fn.stdpath("data") .. "/site",
+})
+
 local ensure_installed = {
 	"json",
 	"javascript",
@@ -31,34 +35,53 @@ local ensure_installed = {
 
 treesitter.install(ensure_installed)
 
-vim.api.nvim_create_autocmd("FileType", {
+local function start_treesitter(buf)
+	if not vim.api.nvim_buf_is_valid(buf) or not vim.api.nvim_buf_is_loaded(buf) then
+		return
+	end
+
+	local ft = vim.bo[buf].filetype
+	if ft == "" then
+		return
+	end
+
+	local lang = vim.treesitter.language.get_lang(ft)
+	if not lang then
+		return
+	end
+
+	local ok_add = pcall(vim.treesitter.language.add, lang)
+	if not ok_add then
+		vim.bo[buf].syntax = ft
+		return
+	end
+
+	local ok_start = pcall(vim.treesitter.start, buf, lang)
+	if not ok_start then
+		vim.bo[buf].syntax = ft
+		return
+	end
+
+	if ft ~= "yaml" and ft ~= "markdown" then
+		vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+		vim.bo[buf].smartindent = false
+		vim.bo[buf].cindent = false
+	end
+end
+
+local treesitter_group = vim.api.nvim_create_augroup("UserTreesitterStart", { clear = true })
+
+vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
+	group = treesitter_group,
 	pattern = "*",
 	callback = function(args)
-		local buf = args.buf
-		local ft = vim.bo[buf].filetype
-		local lang = vim.treesitter.language.get_lang(ft)
-
-		if not lang then
-			return
-		end
-
-		-- load parser safely
-		local ok_add = pcall(vim.treesitter.language.add, lang)
-		if not ok_add then
-			return
-		end
-
-		-- start treesitter safely
-		pcall(vim.treesitter.start, buf, lang)
-
-		-- enable indentation only for real languages
-		if ft ~= "yaml" and ft ~= "markdown" then
-			vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-			vim.bo[buf].smartindent = false
-			vim.bo[buf].cindent = false
-		end
+		start_treesitter(args.buf)
 	end,
 })
+
+for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+	start_treesitter(buf)
+end
 
 -- NOTE: js,ts,jsx,tsx Auto Close Tags
 -- Independent nvim-ts-autotag setup
