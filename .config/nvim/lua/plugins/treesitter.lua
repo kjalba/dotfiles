@@ -28,6 +28,7 @@ local ensure_installed = {
 	"query",
 	"vimdoc",
 	"c",
+	"cpp",
 	"java",
 	"rust",
 	"ron",
