@@ -94,6 +94,8 @@ keybind = super+digit_8=text:\x00\x38
 keybind = super+g=text:\x00\x67
 # Command + f -> Prefix + F (tmux-session-dispensary.sh)
 keybind = super+f=text:\x00\x46
+# Command + d -> Prefix + D (new tmux project)
+keybind = super+d=text:\x00\x44
 # Command + k -> Prefix + K (tmux-session-dispensary.sh config)
 keybind = super+k=text:\x00\x4b
 # Command + p -> Prefix + p (open-pdf.sh)

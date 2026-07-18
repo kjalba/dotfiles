@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+trim() {
+    local value="$1"
+    value="${value#"${value%%[![:space:]]*}"}"
+    value="${value%"${value##*[![:space:]]}"}"
+    printf '%s' "$value"
+}
+
+project_name="${1:-}"
+
+if [[ -z $project_name ]]; then
+    printf 'Project name: '
+    IFS= read -r project_name
+fi
+
+project_name="$(trim "$project_name")"
+
+if [[ -z $project_name ]]; then
+    exit 0
+fi
+
+if [[ $project_name == */* ]]; then
+    printf 'Project name cannot contain /\n' >&2
+    exit 1
+fi
+
+project_dir="$HOME/dev/$project_name"
+mkdir -p "$project_dir"
+
+exec "$HOME/scripts/tmux-sessionizer" "$project_dir"

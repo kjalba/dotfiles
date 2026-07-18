@@ -101,8 +101,23 @@ vim.keymap.set("v", ">", ">gv", opts)
 -- Keep last yanked when pasting
 vim.keymap.set("v", "p", '"_dP', opts)
 
+local function create_tmux_project()
+	local project_name = vim.trim(vim.fn.input("New project name: "))
+
+	if project_name == "" then
+		return
+	end
+
+	local result = vim.fn.jobstart({ vim.fn.expand("~/scripts/new-tmux-project"), project_name }, { detach = true })
+
+	if result <= 0 then
+		vim.notify("Failed to start new tmux project flow", vim.log.levels.ERROR)
+	end
+end
+
 --Starts new tmux session from in here
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+vim.keymap.set("n", "<leader>pn", create_tmux_project, vim.tbl_extend("force", opts, { desc = "Create new project in ~/dev" }))
 
 -- Window management
 vim.keymap.set("n", "<leader>wv", "<C-w>v", opts) -- split window vertically
