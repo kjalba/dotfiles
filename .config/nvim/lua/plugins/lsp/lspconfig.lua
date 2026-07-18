@@ -49,9 +49,32 @@ vim.lsp.config("*", {
 	capabilities = capabilities,
 })
 
+-- A Pico-8 project is any directory (or ancestor) holding a .p8 cart.
+-- Used to route its .lua sources to pico8_ls instead of lua_ls.
+local function pico8_project_root(path)
+	for dir in vim.fs.parents(path) do
+		if #vim.fn.glob(dir .. "/*.p8", true, true) > 0 then
+			return dir
+		end
+	end
+end
+
 -- Configure and enable LSP servers
 -- lua_ls
 vim.lsp.config("lua_ls", {
+	-- Stay off Pico-8 projects; those buffers belong to pico8_ls
+	root_dir = function(bufnr, on_dir)
+		local fname = vim.api.nvim_buf_get_name(bufnr)
+		if pico8_project_root(fname) then
+			return
+		end
+		local root = vim.fs.root(bufnr, {
+			{ ".emmyrc.json", ".luarc.json", ".luarc.jsonc" },
+			{ ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml" },
+			{ ".git" },
+		})
+		on_dir(root or vim.fs.dirname(fname))
+	end,
 	settings = {
 		Lua = {
 			diagnostics = {
@@ -211,15 +234,20 @@ vim.lsp.config("astro", {
 	},
 })
 
+-- pico8_ls (Pico-8 dialect of Lua, installed through mason)
 vim.lsp.config("pico8_ls", {
-	-- Explicitly set the command (usually auto-detected, but good to be safe)
 	cmd = { "pico8-ls", "--stdio" },
 
-	-- IMPORTANT: Treat these filetypes as valid for this LSP
-	filetypes = { "pico8", "p8", "lua" },
+	-- Covers .p8 carts plus .lua sources #include'd from a cart
+	filetypes = { "pico8", "lua" },
 
-	-- This defines the root directory so the LSP knows where your project starts
-	root_dir = require("lspconfig.util").root_pattern("*.p8", "*.lua", ".git"),
+	-- Only attach inside a Pico-8 project so plain Lua stays with lua_ls
+	root_dir = function(bufnr, on_dir)
+		local root = pico8_project_root(vim.api.nvim_buf_get_name(bufnr))
+		if root then
+			on_dir(root)
+		end
+	end,
 })
 
 vim.lsp.config("tinymist", {
@@ -243,4 +271,5 @@ vim.lsp.enable({
 	"tailwindcss",
 	"marksman",
     "tinymist",
+	"pico8_ls",
 })

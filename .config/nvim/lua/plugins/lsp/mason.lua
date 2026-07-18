@@ -28,6 +28,7 @@ mason_lspconfig.setup({
         "emmet_ls",
         "emmet_language_server",
         "marksman",
+        "pico8_ls",
     },
 })
 

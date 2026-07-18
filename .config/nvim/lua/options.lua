@@ -100,6 +100,9 @@ vim.g.editorconfig = true
 -- This is to enable tailwind-tools colorizer to work properly
 vim.o.termguicolors = true
 
+-- Pico-8 carts get their own filetype so Lua tooling leaves them alone
+vim.filetype.add({ extension = { p8 = "pico8" } })
+
 -- -- Auto-wrap for markdown files (stronger version)
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "markdown", "text" },

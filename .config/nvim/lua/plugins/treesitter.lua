@@ -36,6 +36,9 @@ local ensure_installed = {
 
 treesitter.install(ensure_installed)
 
+-- Pico-8 is a Lua dialect; reuse the Lua parser for highlighting
+vim.treesitter.language.register("lua", "pico8")
+
 local function start_treesitter(buf)
 	if not vim.api.nvim_buf_is_valid(buf) or not vim.api.nvim_buf_is_loaded(buf) then
 		return
