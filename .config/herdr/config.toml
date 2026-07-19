@@ -1,0 +1,50 @@
+# herdr configuration
+# Symlinked to ~/.config/herdr/config.toml (stow-style file link)
+# Keybindings mirror ~/.config/tmux/tmux.conf where herdr has an equivalent.
+# Apply changes with: herdr server reload-config
+
+[keys]
+# Same prefix as tmux (tmux.conf: set -g prefix C-Space)
+prefix = "ctrl+space"
+
+# Splits, matching tmux: \ for side-by-side, - for stacked (both in CWD;
+# herdr's terminal.new_cwd = "follow" default already inherits the pane CWD)
+split_vertical = "prefix+backslash"
+split_horizontal = "prefix+minus"
+
+# tmux: bind r source-file (reload). Swap with resize_mode (herdr default r).
+reload_config = "prefix+r"
+resize_mode = "prefix+shift+r"
+
+# tmux: bind x kill-window. herdr tabs = tmux windows, so x closes the tab
+# and the pane close moves to shift+x (swap of herdr defaults).
+close_tab = "prefix+x"
+close_pane = "prefix+shift+x"
+
+# tmux default: prefix+d detaches (herdr default was prefix+q)
+detach = "prefix+d"
+
+# tmux default: prefix+, renames the window
+rename_tab = "prefix+comma"
+
+# tmux: sessionx on prefix+o. herdr workspaces = tmux sessions.
+# Notification target moves off o to make room.
+workspace_picker = "prefix+o"
+open_notification_target = "prefix+shift+o"
+
+# tmux: bind v copy-mode. Closest herdr equivalent is scrollback editing
+# (freed up since split_vertical moved to backslash).
+edit_scrollback = "prefix+v"
+
+# herdr defaults that already match the tmux config, pinned here for clarity:
+new_tab = "prefix+c"            # tmux default: new-window
+switch_tab = "prefix+1..9"      # tmux default: select-window by number
+next_tab = "prefix+n"           # tmux default: next-window
+previous_tab = "prefix+p"       # tmux default: previous-window
+new_workspace = "prefix+shift+n"    # tmux.conf: bind N new-session
+zoom = "prefix+z"               # tmux default: resize-pane -Z
+toggle_sidebar = "prefix+b"     # tmux.conf: bind b toggles the status bar
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
